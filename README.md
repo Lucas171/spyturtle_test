@@ -17,5 +17,5 @@ steps to begin!
    Press CTRL+C to quit
    ...
    ```
-6. use this URL to access web application -> http://127.0.0.1:5000
+6. use the URL that is is runnign on to access the webapp
 7. Enjoy!
