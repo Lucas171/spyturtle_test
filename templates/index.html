@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Instance Segmentation</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="h-100 d-flex align-items-center justify-content-center">
+      <div class="container text-center">
+        <div class="row">
+          <h1>Welcome to SpyTurtle!</h1>
+          <p id="start_message">Click start to begin!</p>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button
+              onclick="startVideo()"
+              type="button"
+              class="btn btn-primary"
+            >
+              Start Video
+            </button>
+          </div>
+          <div class="col">
+            <button onclick="stopVideo()" type="button" class="btn btn-danger">
+              Stop Video
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="">
+            <img
+              id="video_frame"
+              alt="Instance Segmentation Video"
+              src="http://127.0.0.1:5000/video_feed"
+              class="mt-2 border border-secondary"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.3/socket.io.js"></script>
+    <script>
+      var socket = io.connect(
+        "http://" + document.domain + ":" + location.port
+      );
+
+      socket.on("video_frame", function (data) {
+        document.getElementById("video_frame").src =
+          "data:image/jpeg;base64," +
+          btoa(String.fromCharCode.apply(null, new Uint8Array(data.image)));
+      });
+
+      function startVideo() {
+        socket.emit("start_video");
+        document.getElementById("start_message").innerText =
+          "Click stop to stop the feed.";
+      }
+
+      function stopVideo() {
+        socket.emit("stop_video");
+        document.getElementById("start_message").innerText =
+          "Click start to resume.";
+      }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
