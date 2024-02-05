@@ -4,12 +4,12 @@ steps to begin!
 
 1. Download files to a folder of your choice
 2. Open in IDE
-3. in terminal in location of app.py run:
+3. in terminal in location of main.py run:
   ```
   pip install Flask Flask-SocketIO 
   ```
 4. cd into flask folder
-5. In the terminal run app.py to start the flask app
+5. In the terminal run ```python3 app.py``` to start the flask app
 
 NOTE: at this point your flask app is running on your local host port 5000 and waiting for a socket.io message
 
