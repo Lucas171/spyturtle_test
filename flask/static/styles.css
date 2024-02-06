@@ -1,0 +1,8 @@
+#displayedImage:empty {
+  background-color: white;
+  width: 500px;
+  height: 500px;
+   /* Ensure it takes space even without src */
+}
+
+
